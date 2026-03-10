@@ -1,5 +1,5 @@
 {
-  "name": "@snapverse/gui",
+  "name": "@snapverse/ui-kit",
   "version": "0.1.0",
   "private": true,
   "exports": {
@@ -11,8 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/snapverse/snap-ui.git",
-    "directory": "packages/ui"
+    "url": "https://github.com/snapverse/ui-kit.git",
+    "directory": "packages/ui-kit"
   },
   "scripts": {
     "dev": "tsc --watch",
