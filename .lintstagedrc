@@ -1,0 +1,4 @@
+{
+  "**/*.{ts,tsx,js,jsx,md,mdx}": ["prettier --write"],
+  "!(*.config).{ts,tsx,js,jsx}": ["pnpm run lint -- --fix", "git add"]
+}
