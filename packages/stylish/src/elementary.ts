@@ -1,15 +1,17 @@
 import { createElement as createReactElement, HTMLAttributes } from "react";
-import { type ElementTagNames, type StylishProps } from "./index";
+
+import { type ElementTagNames, type StylishProps } from ".";
 
 export const createElement = <
   T extends ElementTagNames,
   P extends React.HTMLAttributes<T> = StylishProps,
 >(
   tag: T,
-  _props: P,
-  children?: React.ReactNode,
+  _props: P & { children?: React.ReactNode },
 ) => {
-  const props = new Proxy(_props, {
+  const { children, ..._restProps } = _props || {};
+
+  const props = new Proxy(_restProps as P, {
     set(target, prop, value) {
       if (prop === "style" && typeof value === "object") {
         // Here you would implement the logic to transform the style object into a CSS class
