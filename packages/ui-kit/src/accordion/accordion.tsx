@@ -1,6 +1,6 @@
 import { createElement, forwardRef } from "react";
 
-import SnapUI from "#types";
+import SnapUI from "@types";
 
 export interface Props extends SnapUI.ComponentProps {
   children: React.ReactNode;

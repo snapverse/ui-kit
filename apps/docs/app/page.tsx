@@ -1,4 +1,4 @@
-import Accordion from "@snapverse/gui/accordion";
+import { Accordion } from "@snapverse/ui-kit";
 
 export default function Home() {
   return (

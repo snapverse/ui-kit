@@ -1,6 +1,6 @@
 import type * as React from "react";
 
-namespace SnapUI {
+namespace UIKit {
   //
   // Snapverse UI Declarations
   // ----------------------------------------------------------------------
@@ -52,4 +52,4 @@ namespace SnapUI {
   }
 }
 
-export default SnapUI;
+export default UIKit;
