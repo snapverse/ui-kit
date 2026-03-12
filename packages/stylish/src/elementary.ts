@@ -1,34 +1,37 @@
-import { createElement as createReactElement, HTMLAttributes } from "react";
+import { createElement as createReactElement } from "react";
+import {
+  appendStyleSheet,
+  StylishElement,
+  transformStyleProps,
+  type ElementProps,
+  type ElementTagNames,
+  type StyleProps,
+} from ".";
 
-import { type ElementTagNames, type StylishProps } from ".";
+const styleKeys = new Set<keyof StyleProps>(
+  Object.keys({} as StyleProps) as (keyof StyleProps)[],
+);
 
 export const createElement = <
   T extends ElementTagNames,
-  P extends React.HTMLAttributes<T> = StylishProps,
+  P extends ElementProps,
 >(
   tag: T,
-  _props: P & { children?: React.ReactNode },
-) => {
+  _props: P,
+): StylishElement => {
   const { children, ..._restProps } = _props || {};
 
   const props = new Proxy(_restProps as P, {
     set(target, prop, value) {
-      if (prop === "style" && typeof value === "object") {
-        // Here you would implement the logic to transform the style object into a CSS class
-        // and inject the corresponding styles into the document.
-        // For simplicity, we will just log the styles here.
-        console.log("Transforming style:", value);
-        // You would replace this with the actual class name generated from the styles.
-        target["className"] = "generated-class";
-        return true;
+      if (styleKeys.has(prop as keyof StyleProps)) {
+        const stylesheet = transformStyleProps(prop as string, value);
+        appendStyleSheet(stylesheet);
+        target.className += ` ${stylesheet}`;
       }
-      return true;
+
+      return Reflect.set(target, prop, value);
     },
   });
 
-  return createReactElement<HTMLAttributes<typeof tag> & P>(
-    tag,
-    props,
-    children,
-  );
+  return createReactElement<P>(tag, props, children);
 };

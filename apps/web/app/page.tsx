@@ -1,5 +1,5 @@
+import { stylish } from "@snapverse/stylish/factory";
 import Image, { type ImageProps } from "next/image";
-import stylish from "@snapverse/stylish/factory";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {
@@ -34,7 +34,7 @@ export default function Home() {
         <ol>
           <li>
             Get started by editing
-            <stylish.code>apps/web/app/page.tsx</stylish.code>
+            <stylish.code display="flex">apps/web/app/page.tsx</stylish.code>
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>

@@ -18,8 +18,7 @@ String.random = function (size = 10): string {
 };
 
 String.prototype.toKebabCase = function (): string {
-  return this
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
+  return this.replace(/([a-z])([A-Z])/g, "$1-$2")
     .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
     .toLowerCase();
 };

@@ -1,7 +1,9 @@
-import SnapUI from "@types";
 import { createElement, forwardRef } from "react";
+import UIKit from "@types";
 
-export interface BoxProps extends SnapUI.ComponentProps {}
+export interface BoxProps extends UIKit.ComponentProps {
+  children?: React.ReactNode;
+}
 
 const Box = forwardRef<HTMLDivElement, BoxProps>(
   ({ children, ...props }, ref) => {

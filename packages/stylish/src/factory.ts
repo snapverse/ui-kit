@@ -1,22 +1,21 @@
 import { createElement } from "./elementary";
-import type { ElementTagNames, StylishProps } from "./index.d";
+import type { ElementProps, ElementTagNames, StylishElement } from "./index.d";
 
-const cache = new Map<string, unknown>();
+const cache = new Map<string, StylishElement>();
 
 type StylishFactory = {
-  [K in ElementTagNames]: (
-    props: StylishProps & React.HTMLAttributes<K>,
-  ) => React.ReactElement;
+  [K in ElementTagNames]: (props: ElementProps) => React.ReactElement;
 };
 
-const stylish = new Proxy({} as StylishFactory, {
+export const stylish = new Proxy({} as StylishFactory, {
   get(_target, prop: ElementTagNames) {
     if (!cache.has(prop)) {
-      const element = createElement.bind(null, prop);
+      const element = createElement.bind(
+        null,
+        prop,
+      ) as unknown as StylishElement;
       cache.set(prop, element);
     }
-    return cache.get(prop);
+    return cache.get(prop)!;
   },
 });
-
-export default stylish;
